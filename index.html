@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="lUFXotxvm4H0hm3bPKCZAl">
+<head data-page-node-id="3HZVLiNx62V9ssjfQsjbjn">
+<meta charset="UTF-8" data-page-node-id="3XUox1AOW1GdWJ4poCz6gf">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="8THs7bdCrDmpOpiqEWcaoU">
+<title>吴林晔 — Portfolio 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Noto+Sans+SC:wght@200;300;400;500;600;700&family=Noto+Serif+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" data-page-node-id="qCh4wdj6lkAKhl4KATQntt">
+
+<style>
+  :root {
+    --ivory: #f5f2ed;
+    --ivory-deep: #ede8e0;
+    --ink: #1c1c1a;
+    --ink-soft: #3a3530;
+    --warm-grey: #8a8580;
+    --light-grey: #b0aaa0;
+    --bronze: #9a8265;
+    --bronze-deep: #7d6850;
+    --bronze-soft: #b8a68a;
+    --bronze-wash: rgba(154,130,101,0.06);
+    --white: #ffffff;
+    --line: #e0d8cc;
+    --line-soft: #ebe4d8;
+    --accent-glow: rgba(154,130,101,0.12);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
+  body {
+    font-family:'Noto Sans SC',sans-serif;
+    background:var(--ivory);
+    color:var(--ink-soft);
+    line-height:1.8;
+    font-weight:300;
+    overflow-x:hidden;
+    cursor:none;
+  }
+
+  /* ===== Custom Cursor ===== */
+  .cursor-dot{
+    position:fixed;width:8px;height:8px;border-radius:50%;
+    background:var(--bronze);pointer-events:none;z-index:9999;
+    transition:width .3s,height .3s,background .3s,opacity .3s;
+    transform:translate(-50%,-50%);mix-blend-mode:difference;
+  }
+  .cursor-ring{
+    position:fixed;width:40px;height:40px;border-radius:50%;
+    border:1px solid var(--bronze);pointer-events:none;z-index:9998;
+    transition:width .4s cubic-bezier(.22,1,.36,1),height .4s cubic-bezier(.22,1,.36,1),border-color .3s,opacity .3s;
+    transform:translate(-50%,-50%);opacity:.5;
+  }
+  .cursor-dot.hover{width:0;height:0;}
+  .cursor-ring.hover{width:64px;height:64px;border-color:var(--ink);opacity:.8;}
+  @media(max-width:900px){.cursor-dot,.cursor-ring{display:none;}body{cursor:auto;}}
+
+  /* ===== Scroll Progress ===== */
+  .scroll-progress{
+    position:fixed;top:0;left:0;height:2px;width:0%;
+    background:linear-gradient(90deg,var(--bronze),var(--bronze-soft));
+    z-index:200;transition:width .1s linear;
+  }
+
+  /* ===== Animations ===== */
+  @keyframes fadeUp { from{opacity:0;transform:translateY(60px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes scaleIn { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  @keyframes drift {
+    0%{transform:translate(0,0) rotate(0deg)} 25%{transform:translate(20px,-15px) rotate(2deg)}
+    50%{transform:translate(-10px,10px) rotate(-1deg)} 75%{transform:translate(15px,-5px) rotate(1deg)} 100%{transform:translate(0,0) rotate(0deg)}
+  }
+  @keyframes floatSlow { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-18px) rotate(1deg)} }
+  @keyframes drawLine { from{width:0} to{width:100%} }
+  @keyframes shimmer { 0%{background-position:-200% center} 100%{background-position:200% center} }
+  @keyframes pulse-ring {
+    0%{transform:scale(1);opacity:.4;}
+    100%{transform:scale(1.8);opacity:0;}
+  }
+  @keyframes marquee {
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  .reveal{opacity:0}
+  .reveal.up{animation:fadeUp 1.1s cubic-bezier(.22,1,.36,1) forwards}
+  .reveal.scale{animation:scaleIn 1.1s cubic-bezier(.22,1,.36,1) forwards}
+  .reveal.in{animation:fadeIn 1.4s ease forwards}
+
+  /* ===== Word Reveal ===== */
+  .word-reveal{display:inline-block;overflow:hidden;vertical-align:top;}
+  .word-reveal span{
+    display:inline-block;transform:translateY(110%);opacity:0;
+    transition:transform .8s cubic-bezier(.22,1,.36,1),opacity .8s ease;
+  }
+  .word-reveal.visible span{transform:translateY(0);opacity:1;}
+
+  /* ===== Nav ===== */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:22px 56px;display:flex;justify-content:space-between;align-items:center;
+    transition:all .4s ease;background:transparent;
+  }
+  .nav.scrolled{
+    background:rgba(245,242,237,.9);backdrop-filter:blur(24px);
+    padding:14px 56px;border-bottom:1px solid rgba(224,216,204,.4);
+  }
+  .nav-brand{
+    font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;
+    color:var(--ink);letter-spacing:.02em;position:relative;
+  }
+  .nav-brand::after{
+    content:'';position:absolute;bottom:-3px;left:0;width:100%;height:1px;
+    background:var(--bronze);transform:scaleX(0);transform-origin:right;
+    transition:transform .5s cubic-bezier(.22,1,.36,1);
+  }
+  .nav-brand:hover::after{transform:scaleX(1);transform-origin:left;}
+  .nav-links{display:flex;gap:36px;list-style:none;}
+  .nav-links a{
+    text-decoration:none;font-size:.72rem;color:var(--ink-soft);
+    letter-spacing:.14em;text-transform:uppercase;font-weight:500;
+    transition:color .3s;position:relative;
+  }
+  .nav-links a::after{
+    content:'';position:absolute;bottom:-5px;left:0;
+    width:0;height:1px;background:var(--bronze);transition:width .4s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-links a:hover{color:var(--bronze);}
+
+  /* ===== Hero ===== */
+  .hero{
+    min-height:100vh;display:flex;align-items:center;
+    position:relative;overflow:hidden;padding:120px 56px 80px;
+  }
+  .hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,var(--ivory) 0%,var(--ivory-deep) 60%,#e3ddd0 100%);}
+  .hero-glow{
+    position:absolute;width:700px;height:700px;border-radius:50%;
+    background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);
+    top:-150px;right:-200px;animation:drift 22s ease-in-out infinite;
+  }
+  .hero-glow-2{
+    position:absolute;width:450px;height:450px;border-radius:50%;
+    background:radial-gradient(circle,rgba(28,28,26,.03) 0%,transparent 70%);
+    bottom:-80px;left:-120px;animation:drift 28s ease-in-out infinite reverse;
+  }
+  .hero-noise{
+    position:absolute;inset:0;opacity:.03;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .hero-grid{
+    display:grid;grid-template-columns:1.3fr .7fr;gap:80px;
+    max-width:1280px;margin:0 auto;width:100%;align-items:center;position:relative;z-index:2;
+  }
+  .hero-text{animation:fadeUp 1.4s cubic-bezier(.22,1,.36,1) forwards;}
+
+  .hero-eyebrow{
+    display:flex;align-items:center;gap:12px;margin-bottom:28px;
+    animation:fadeIn 1s ease forwards .3s;opacity:0;
+  }
+  .hero-eyebrow .dot{
+    width:8px;height:8px;border-radius:50%;background:var(--bronze);
+    position:relative;
+  }
+  .hero-eyebrow .dot::before{
+    content:'';position:absolute;inset:0;border-radius:50%;background:var(--bronze);
+    animation:pulse-ring 2s ease-out infinite;
+  }
+  .hero-eyebrow span{
+    font-family:'Playfair Display',serif;font-style:italic;
+    font-size:.85rem;color:var(--bronze);letter-spacing:.18em;
+  }
+
+  .hero-name{
+    font-family:'Noto Serif SC',serif;font-weight:900;
+    font-size:clamp(3.5rem,7vw,6rem);color:var(--ink);
+    line-height:1.05;letter-spacing:.02em;margin-bottom:24px;
+  }
+  .hero-name .char{
+    display:inline-block;opacity:0;transform:translateY(80px);
+    animation:fadeUp .8s cubic-bezier(.22,1,.36,1) forwards;
+  }
+
+  .hero-bronze-line{
+    width:0;height:2px;background:var(--bronze);margin-bottom:36px;
+    animation:drawLine 1.2s cubic-bezier(.22,1,.36,1) forwards 1s;
+  }
+  .hero-subtagline{
+    font-size:.95rem;color:var(--warm-grey);max-width:480px;
+    margin-bottom:40px;line-height:2;font-weight:300;
+    animation:fadeIn 1s ease forwards 1.2s;opacity:0;
+  }
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;animation:fadeIn 1s ease forwards 1.4s;opacity:0;}
+
+  .btn-dark{
+    padding:16px 42px;border-radius:50px;background:var(--ink);color:var(--ivory);
+    text-decoration:none;font-size:.78rem;letter-spacing:.14em;font-weight:500;
+    text-transform:uppercase;border:none;
+    transition:all .4s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden;
+  }
+  .btn-dark::before{
+    content:'';position:absolute;inset:0;background:var(--bronze);
+    transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.22,1,.36,1);
+    border-radius:50px;
+  }
+  .btn-dark:hover::before{transform:scaleX(1);}
+  .btn-dark span{position:relative;z-index:1;}
+  .btn-dark:hover{box-shadow:0 12px 36px rgba(154,130,101,.25);}
+
+  .btn-line{
+    padding:16px 42px;border-radius:50px;background:transparent;color:var(--ink);
+    text-decoration:none;font-size:.78rem;letter-spacing:.14em;font-weight:500;
+    text-transform:uppercase;border:1.5px solid var(--line);
+    transition:all .4s cubic-bezier(.22,1,.36,1);
+  }
+  .btn-line:hover{border-color:var(--ink);background:var(--ink);color:var(--ivory);transform:translateY(-2px);}
+
+  .hero-visual{position:relative;display:flex;justify-content:center;}
+  .hero-frame{
+    position:relative;width:340px;height:460px;overflow:hidden;
+    animation:scaleIn 1.4s cubic-bezier(.22,1,.36,1) forwards .3s;opacity:0;
+    will-change:transform;
+  }
+  .hero-frame::before{
+    content:'';position:absolute;inset:12px;z-index:3;
+    border:1px solid rgba(245,242,237,.3);pointer-events:none;
+  }
+  .hero-frame::after{
+    content:'';position:absolute;inset:0;z-index:2;
+    background:linear-gradient(to top,rgba(28,28,26,.3) 0%,transparent 50%);
+  }
+  .hero-frame img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.22,1,.36,1);}
+  .hero-frame:hover img{transform:scale(1.06);}
+
+  .hero-frame-tag{
+    position:absolute;bottom:24px;left:24px;z-index:4;
+    color:var(--ivory);font-family:'Playfair Display',serif;font-style:italic;
+    font-size:.82rem;letter-spacing:.1em;opacity:0;
+    animation:fadeIn 1s ease forwards 1.8s;
+  }
+
+  .scroll-hint{
+    position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    color:var(--warm-grey);font-size:.65rem;letter-spacing:.2em;
+    text-transform:uppercase;text-decoration:none;opacity:0;
+    animation:fadeIn 2s ease forwards 1.8s;
+  }
+  .scroll-hint .line{
+    width:1px;height:36px;
+    background:linear-gradient(to bottom,var(--warm-grey),transparent);
+    animation:floatSlow 2s ease-in-out infinite;
+  }
+
+  /* ===== Marquee ===== */
+  .marquee-strip{
+    overflow:hidden;padding:20px 0;background:var(--ink);
+    border-top:1px solid rgba(245,242,237,.06);border-bottom:1px solid rgba(245,242,237,.06);
+  }
+  .marquee-track{
+    display:flex;gap:60px;width:max-content;
+    animation:marquee 30s linear infinite;
+  }
+  .marquee-item{
+    font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;
+    color:rgba(245,242,237,.3);white-space:nowrap;display:flex;align-items:center;gap:60px;
+  }
+  .marquee-item::after{content:'✦';color:var(--bronze-soft);font-size:.8rem;}
+
+  /* ===== Section Base ===== */
+  section{position:relative;padding:140px 56px;}
+  .container{max-width:1280px;margin:0 auto;}
+  .container-narrow{max-width:880px;margin:0 auto;}
+  .sec-eyebrow{
+    font-family:'Playfair Display',serif;font-style:italic;
+    font-size:.82rem;color:var(--bronze);letter-spacing:.22em;
+    text-transform:uppercase;margin-bottom:18px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .sec-eyebrow::before{
+    content:'';width:24px;height:1px;background:var(--bronze);
+  }
+  .sec-title{
+    font-family:'Noto Serif SC',serif;font-weight:700;
+    font-size:clamp(2rem,4vw,3.2rem);color:var(--ink);
+    line-height:1.25;letter-spacing:.02em;
+  }
+  .sec-title-en{
+    font-family:'Playfair Display',serif;font-style:italic;
+    font-size:1.05rem;color:var(--warm-grey);font-weight:400;
+    margin-top:10px;display:block;letter-spacing:.06em;
+  }
+
+  /* ===== Profile ===== */
+  .profile-section{background:var(--ink);color:var(--ivory);padding:120px 56px;position:relative;overflow:hidden;}
+  .profile-section .sec-eyebrow{color:var(--bronze-soft);}
+  .profile-section .sec-eyebrow::before{background:var(--bronze-soft);}
+  .profile-section .sec-title{color:var(--ivory);}
+  .profile-section .sec-title-en{color:rgba(245,242,237,.4);}
+
+  .profile-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:80px;}
+  .profile-metric{
+    text-align:center;padding:0 16px;position:relative;
+  }
+  .profile-metric:not(:last-child)::after{
+    content:'';position:absolute;right:-12px;top:20%;height:60%;width:1px;
+    background:rgba(245,242,237,.08);
+  }
+  .profile-metric .num{
+    font-family:'Playfair Display',serif;font-size:clamp(3rem,5.5vw,4.5rem);
+    color:var(--bronze-soft);line-height:1;margin-bottom:14px;font-weight:600;
+    position:relative;display:inline-block;
+  }
+  .profile-metric .num .suffix{font-size:.5em;color:var(--bronze);}
+  .profile-metric .label{font-size:.78rem;color:rgba(245,242,237,.5);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
+  .profile-metric .desc{font-size:.82rem;color:rgba(245,242,237,.65);margin-top:8px;line-height:1.7;max-width:220px;margin-left:auto;margin-right:auto;}
+
+  /* ===== Education ===== */
+  .edu-section{background:var(--ivory);}
+  .edu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:72px;}
+  .edu-item{
+    padding:48px 40px;border-left:1px solid var(--line-soft);position:relative;
+    transition:background .4s ease;
+  }
+  .edu-item:first-child{border-left:none;padding-left:0;}
+  .edu-item:last-child{padding-right:0;}
+  .edu-item:hover{background:var(--bronze-wash);}
+  .edu-index{font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;color:var(--bronze);margin-bottom:24px;}
+  .edu-school{font-family:'Noto Serif SC',serif;font-size:1.25rem;color:var(--ink);font-weight:600;margin-bottom:4px;}
+  .edu-major{font-size:.85rem;color:var(--bronze);margin-bottom:6px;font-weight:500;}
+  .edu-degree{font-size:.78rem;color:var(--warm-grey);margin-bottom:20px;letter-spacing:.04em;}
+  .edu-line{width:30px;height:1px;background:var(--bronze);margin-bottom:20px;transition:width .4s ease;}
+  .edu-item:hover .edu-line{width:50px;}
+  .edu-detail{font-size:.82rem;color:var(--ink-soft);line-height:1.9;}
+  .edu-detail strong{color:var(--ink);font-weight:500;}
+
+  /* ===== Experience ===== */
+  .exp-section{background:var(--ivory);padding:140px 56px 0;}
+  .exp-header{text-align:center;margin-bottom:100px;}
+  .exp-header .sec-eyebrow{justify-content:center;}
+  .exp-header .sec-eyebrow::before{display:none;}
+  .exp-intro{max-width:600px;margin:24px auto 0;font-size:.95rem;color:var(--warm-grey);line-height:1.9;font-weight:300;}
+
+  .exp-case{max-width:1280px;margin:0 auto 140px;position:relative;}
+  .exp-case-num{
+    font-family:'Playfair Display',serif;font-style:italic;font-weight:700;
+    font-size:clamp(6rem,12vw,10rem);color:rgba(154,130,101,.07);
+    line-height:.8;position:absolute;top:-30px;left:-15px;pointer-events:none;user-select:none;
+  }
+  .exp-case-header{
+    display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:48px;position:relative;
+  }
+  .exp-case-company{font-family:'Noto Serif SC',serif;font-size:1.5rem;color:var(--ink);font-weight:600;margin-bottom:4px;line-height:1.4;}
+  .exp-case-role{font-size:.85rem;color:var(--bronze);font-weight:500;letter-spacing:.06em;}
+  .exp-case-period{
+    font-size:.78rem;color:var(--warm-grey);letter-spacing:.08em;text-align:right;
+    display:flex;align-items:center;justify-content:flex-end;gap:8px;
+  }
+  .exp-case-period::before{
+    content:'';width:6px;height:6px;border-radius:50%;background:var(--bronze);
+  }
+
+  .exp-case-body{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+  .exp-case-body.stacked{grid-template-columns:1fr;}
+  .exp-block{margin-bottom:32px;}
+  .exp-block:last-child{margin-bottom:0;}
+  .exp-block-title{
+    font-family:'Noto Serif SC',serif;font-size:.95rem;color:var(--ink);
+    font-weight:500;margin-bottom:12px;display:flex;align-items:center;gap:10px;
+  }
+  .exp-block-title::before{content:'';width:18px;height:1px;background:var(--bronze);flex-shrink:0;}
+  .exp-block-detail{font-size:.85rem;color:var(--ink-soft);line-height:2;font-weight:300;padding-left:28px;}
+  .exp-block-detail .hl{color:var(--ink);font-weight:500;}
+  .exp-block-detail .br{color:var(--bronze);font-weight:500;}
+
+  /* Metrics Strip */
+  .metrics-strip{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    margin:36px 0;padding:36px 0;
+    border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);
+    position:relative;
+  }
+  .metrics-strip::before{
+    content:'';position:absolute;top:-1px;left:0;width:60px;height:1px;background:var(--bronze);
+  }
+  .metrics-strip .m-item{text-align:center;padding:0 12px;position:relative;}
+  .metrics-strip .m-item:not(:last-child)::after{
+    content:'';position:absolute;right:0;top:20%;height:60%;width:1px;background:var(--line-soft);
+  }
+  .metrics-strip .m-num{font-family:'Playfair Display',serif;font-size:2rem;color:var(--ink);line-height:1;margin-bottom:8px;font-weight:600;}
+  .metrics-strip .m-label{font-size:.7rem;color:var(--warm-grey);letter-spacing:.08em;}
+  .metrics-strip.three{grid-template-columns:repeat(3,1fr);}
+
+  /* Visual Side Panels */
+  .impact-card{
+    background:var(--white);padding:40px 36px;border:1px solid var(--line-soft);position:relative;
+    transition:transform .4s ease,box-shadow .4s ease;
+  }
+  .impact-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(28,28,26,.06);}
+  .impact-card-title{
+    font-family:'Playfair Display',serif;font-style:italic;
+    font-size:.82rem;color:var(--warm-grey);margin-bottom:24px;letter-spacing:.1em;text-transform:uppercase;
+  }
+  .impact-item{display:flex;align-items:baseline;gap:16px;padding:14px 0;border-bottom:1px solid var(--line-soft);}
+  .impact-item:last-child{border-bottom:none;}
+  .impact-item .dot{width:6px;height:6px;border-radius:50%;background:var(--bronze);flex-shrink:0;transition:transform .3s ease;}
+  .impact-item:hover .dot{transform:scale(1.5);}
+  .impact-item .text{font-size:.82rem;color:var(--ink-soft);line-height:1.7;}
+
+  .growth-viz{
+    background:var(--white);padding:40px 36px;border:1px solid var(--line-soft);position:relative;
+    transition:transform .4s ease,box-shadow .4s ease;
+  }
+  .growth-viz:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(28,28,26,.06);}
+  .growth-viz-title{
+    font-family:'Playfair Display',serif;font-style:italic;
+    font-size:.82rem;color:var(--warm-grey);margin-bottom:28px;letter-spacing:.1em;text-transform:uppercase;
+  }
+  .growth-bar-wrap{margin-bottom:24px;}
+  .growth-bar-label{display:flex;justify-content:space-between;font-size:.78rem;color:var(--ink-soft);margin-bottom:8px;}
+  .growth-bar-track{height:8px;background:var(--ivory-deep);border-radius:4px;overflow:hidden;position:relative;}
+  .growth-bar-fill{height:100%;background:linear-gradient(90deg,var(--bronze),var(--bronze-soft));border-radius:4px;width:0;transition:width 1.5s cubic-bezier(.22,1,.36,1);}
+  .growth-bar-fill.animate{width:var(--target-width);}
+  .growth-comparison{display:flex;align-items:center;gap:20px;margin-top:32px;padding-top:24px;border-top:1px solid var(--line-soft);}
+  .growth-comparison .from,.growth-comparison .to{text-align:center;flex:1;}
+  .growth-comparison .arrow{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--bronze);}
+  .growth-comparison .val{font-family:'Playfair Display',serif;font-size:2rem;color:var(--ink);font-weight:600;line-height:1;}
+  .growth-comparison .val-label{font-size:.72rem;color:var(--warm-grey);margin-top:6px;}
+
+  /* ===== Portfolio Trigger ===== */
+  .portfolio-trigger{
+    display:inline-flex;align-items:center;gap:14px;margin-top:32px;
+    padding:14px 32px;border:1px solid var(--line);background:var(--white);
+    color:var(--ink);font-size:.78rem;letter-spacing:.12em;font-weight:500;
+    cursor:none;transition:all .4s cubic-bezier(.22,1,.36,1);font-family:'Noto Sans SC',sans-serif;
+    border-radius:50px;position:relative;overflow:hidden;
+  }
+  .portfolio-trigger::before{
+    content:'';position:absolute;top:0;left:0;width:100%;height:100%;
+    background:var(--ink);transform:scaleX(0);transform-origin:left;
+    transition:transform .45s cubic-bezier(.22,1,.36,1);z-index:0;border-radius:50px;
+  }
+  .portfolio-trigger:hover::before{transform:scaleX(1);}
+  .portfolio-trigger:hover{border-color:var(--ink);color:var(--ivory);transform:translateY(-2px);box-shadow:0 8px 28px rgba(28,28,26,.14);}
+  .portfolio-trigger span,.portfolio-trigger .pt-icon{position:relative;z-index:1;}
+  .portfolio-trigger .pt-icon{
+    width:18px;height:18px;display:flex;align-items:center;justify-content:center;
+    transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+  }
+  .portfolio-trigger .pt-icon::before,.portfolio-trigger .pt-icon::after{
+    content:'';position:absolute;background:currentColor;border-radius:1px;transition:background .3s;
+  }
+  .portfolio-trigger .pt-icon::before{width:10px;height:1.5px;}
+  .portfolio-trigger .pt-icon::after{width:1.5px;height:10px;}
+  .portfolio-trigger.open .pt-icon{transform:rotate(135deg);}
+  .portfolio-trigger.open{border-color:var(--ink);color:var(--ivory);}
+  .portfolio-trigger.open::before{transform:scaleX(1);}
+  .portfolio-trigger .ripple{
+    position:absolute;border-radius:50%;background:rgba(154,130,101,.3);
+    transform:scale(0);animation:ripple .6s ease-out;pointer-events:none;z-index:2;
+  }
+  @keyframes ripple{to{transform:scale(4);opacity:0;}}
+
+  /* ===== Portfolio Drawer ===== */
+  .portfolio-drawer{
+    max-height:0;overflow:hidden;
+    transition:max-height .55s cubic-bezier(.22,1,.36,1),margin .45s ease,opacity .35s ease;
+    opacity:0;margin-top:0;
+  }
+  .portfolio-drawer.open{max-height:5000px;opacity:1;margin-top:28px;}
+  .portfolio-drawer-inner{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+    padding:28px;background:var(--white);border:1px solid var(--line-soft);
+  }
+
+  .pf-doc{
+    display:flex;flex-direction:column;align-items:center;gap:12px;
+    padding:32px 20px;border:1px solid var(--line-soft);background:var(--ivory);
+    cursor:none;text-decoration:none;color:inherit;transition:all .3s ease;position:relative;overflow:hidden;
+  }
+  .pf-doc:hover{border-color:var(--bronze);transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.06);}
+  .pf-doc::after{
+    content:'';position:absolute;top:0;left:0;right:0;height:2px;
+    background:var(--bronze);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.22,1,.36,1);
+  }
+  .pf-doc:hover::after{transform:scaleX(1);}
+  .pf-doc-icon{width:56px;height:56px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;border-radius:50%;background:var(--white);border:1px solid var(--line-soft);flex-shrink:0;}
+  .pf-doc-name{font-family:'Noto Serif SC',serif;font-size:.85rem;color:var(--ink);font-weight:500;text-align:center;line-height:1.5;}
+  .pf-doc-type{font-size:.7rem;color:var(--warm-grey);letter-spacing:.08em;text-transform:uppercase;}
+  .pf-doc-hint{font-size:.68rem;color:var(--light-grey);}
+
+  .pf-section-label{
+    grid-column:1/-1;font-family:'Noto Serif SC',serif;font-size:.9rem;color:var(--ink);font-weight:500;
+    letter-spacing:.06em;padding-bottom:8px;border-bottom:1px solid var(--line-soft);margin-bottom:4px;
+  }
+  .pf-thumb-grid{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+  .pf-thumb-card{
+    display:flex;flex-direction:column;gap:10px;text-decoration:none;color:inherit;cursor:none;
+    transition:transform .3s ease;position:relative;
+  }
+  .pf-thumb-card:hover{transform:translateY(-6px);}
+  .pf-thumb-card .img-wrap{position:relative;overflow:hidden;}
+  .pf-thumb-card img{
+    width:100%;aspect-ratio:4/5;object-fit:cover;border:1px solid var(--line-soft);
+    transition:transform .6s cubic-bezier(.22,1,.36,1),box-shadow .3s ease;
+  }
+  .pf-thumb-card:hover img{transform:scale(1.08);box-shadow:0 12px 36px rgba(0,0,0,.1);}
+  .pf-thumb-card .img-overlay{
+    position:absolute;inset:0;background:linear-gradient(to top,rgba(28,28,26,.5) 0%,transparent 60%);
+    opacity:0;transition:opacity .4s ease;display:flex;align-items:flex-end;padding:16px;
+  }
+  .pf-thumb-card:hover .img-overlay{opacity:1;}
+  .pf-thumb-card .img-overlay .view-text{
+    color:var(--ivory);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+    display:flex;align-items:center;gap:6px;
+  }
+  .pf-thumb-card .t-title{font-size:.78rem;color:var(--ink-soft);line-height:1.5;font-weight:400;}
+
+  .pf-link-grid{grid-column:1/-1;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
+  .pf-link-card{
+    display:flex;flex-direction:column;gap:8px;padding:20px 16px;border:1px solid var(--line-soft);background:var(--ivory);
+    text-decoration:none;color:inherit;cursor:none;transition:all .3s ease;position:relative;overflow:hidden;
+  }
+  .pf-link-card::after{
+    content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--bronze);
+    transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.22,1,.36,1);
+  }
+  .pf-link-card:hover::after{transform:scaleX(1);}
+  .pf-link-card:hover{border-color:var(--bronze);transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.05);}
+  .pf-link-card .l-source{font-size:.65rem;color:var(--bronze);letter-spacing:.08em;text-transform:uppercase;font-weight:500;}
+  .pf-link-card .l-title{font-size:.78rem;color:var(--ink);font-weight:500;line-height:1.5;}
+  .pf-link-card .l-arrow{font-size:.75rem;color:var(--warm-grey);margin-top:auto;align-self:flex-end;transition:transform .3s ease;}
+  .pf-link-card:hover .l-arrow{transform:translate(4px,-4px);color:var(--bronze);}
+
+  .pf-block{display:flex;flex-direction:column;gap:16px;}
+  .pf-block-label{
+    font-family:'Noto Serif SC',serif;font-size:.9rem;color:var(--ink);font-weight:500;
+    letter-spacing:.06em;padding-bottom:8px;border-bottom:1px solid var(--line-soft);
+  }
+  .pf-ig-card{display:flex;flex-direction:column;gap:10px;text-decoration:none;color:inherit;cursor:none;}
+  .pf-ig-card .ig-row{display:flex;gap:8px;overflow:hidden;}
+  .pf-ig-card .ig-row img{width:calc(50% - 4px);aspect-ratio:3/4;object-fit:cover;border:1px solid var(--line-soft);transition:transform .4s ease;}
+  .pf-ig-card:hover .ig-row img{transform:scale(1.03);}
+  .pf-ig-card .ig-handle{font-size:.78rem;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
+  .pf-ig-card .ig-handle .ig-icon{width:18px;height:18px;background:var(--ink);border-radius:4px;display:inline-flex;align-items:center;justify-content:center;color:var(--ivory);font-size:10px;}
+
+  .pf-link-row{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:14px 16px;border:1px solid var(--line-soft);background:var(--white);
+    text-decoration:none;color:inherit;cursor:none;transition:all .25s ease;
+  }
+  .pf-link-row:hover{border-color:var(--bronze);background:var(--ivory);}
+  .pf-link-row .lr-title{font-size:.8rem;color:var(--ink);font-weight:500;}
+  .pf-link-row .lr-url{font-size:.68rem;color:var(--warm-grey);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px;}
+  .pf-link-row .lr-arrow{color:var(--bronze);font-size:.8rem;flex-shrink:0;transition:transform .3s ease;}
+  .pf-link-row:hover .lr-arrow{transform:translate(4px,-4px);}
+
+  /* Gallery Grid */
+  .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+  .gallery-grid .thumb{
+    width:100%;aspect-ratio:1/1;object-fit:cover;cursor:none;
+    transition:transform .35s ease,box-shadow .35s ease,filter .35s ease;
+    border:1px solid var(--line-soft);filter:saturate(.9);
+  }
+  .gallery-grid .thumb:hover{transform:scale(1.03);box-shadow:0 8px 30px rgba(0,0,0,.08);z-index:5;filter:saturate(1.1);}
+
+  /* Lightbox */
+  #lightbox{
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(28,28,26,.94);z-index:1000;display:none;
+    align-items:center;justify-content:center;cursor:none;backdrop-filter:blur(12px);
+  }
+  #lightbox.active{display:flex;}
+  #lightbox img{max-width:88vw;max-height:88vh;box-shadow:0 12px 60px rgba(0,0,0,.4);cursor:none;animation:scaleIn .5s cubic-bezier(.22,1,.36,1);}
+  #lb-close{
+    position:fixed;top:28px;right:32px;width:44px;height:44px;
+    border-radius:50%;background:rgba(245,242,237,.08);border:1px solid rgba(245,242,237,.15);
+    color:var(--ivory);font-size:1.2rem;cursor:none;display:none;
+    align-items:center;justify-content:center;z-index:1001;transition:background .2s,transform .3s;
+  }
+  #lb-close.active{display:flex;}
+  #lb-close:hover{background:rgba(245,242,237,.18);transform:rotate(90deg);}
+
+  /* ===== Sports ===== */
+  .sports-section{background:var(--ivory-deep);padding:140px 56px;position:relative;overflow:hidden;}
+  .sports-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:72px;}
+  .sports-card{
+    background:var(--white);padding:44px 36px;border:1px solid var(--line-soft);
+    transition:all .5s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden;
+  }
+  .sports-card:hover{transform:translateY(-8px);box-shadow:0 24px 64px rgba(28,28,26,.08);}
+  .sports-card::before{
+    content:'';position:absolute;top:0;left:0;width:100%;height:3px;
+    background:linear-gradient(90deg,var(--bronze),var(--bronze-soft));
+    transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.22,1,.36,1);
+  }
+  .sports-card:hover::before{transform:scaleX(1);}
+  .sports-card-num{font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;color:var(--bronze);margin-bottom:20px;}
+  .sports-card-event{font-family:'Noto Serif SC',serif;font-size:1.15rem;color:var(--ink);font-weight:600;margin-bottom:4px;line-height:1.4;}
+  .sports-card-role{font-size:.78rem;color:var(--bronze);font-weight:500;margin-bottom:6px;}
+  .sports-card-date{font-size:.72rem;color:var(--warm-grey);letter-spacing:.06em;margin-bottom:20px;}
+  .sports-card-line{width:24px;height:1px;background:var(--bronze);margin-bottom:20px;transition:width .4s ease;}
+  .sports-card:hover .sports-card-line{width:48px;}
+  .sports-card-detail{font-size:.82rem;color:var(--ink-soft);line-height:1.9;font-weight:300;}
+
+  /* ===== Contact ===== */
+  .contact-section{
+    background:var(--ink);color:var(--ivory);padding:120px 56px;
+    position:relative;overflow:hidden;text-align:center;
+  }
+  .contact-glow{
+    position:absolute;width:600px;height:600px;border-radius:50%;
+    background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);
+    top:50%;left:50%;transform:translate(-50%,-50%);animation:drift 20s ease-in-out infinite;
+  }
+  .contact-content{position:relative;z-index:2;}
+  .contact-eyebrow{
+    font-family:'Playfair Display',serif;font-style:italic;
+    font-size:.85rem;color:var(--bronze-soft);letter-spacing:.22em;
+    text-transform:uppercase;margin-bottom:20px;
+  }
+  .contact-title{
+    font-family:'Noto Serif SC',serif;font-size:clamp(1.8rem,4vw,2.8rem);
+    color:var(--ivory);font-weight:700;line-height:1.4;margin-bottom:48px;
+  }
+  .contact-grid{display:flex;justify-content:center;gap:64px;flex-wrap:wrap;margin-bottom:60px;}
+  .contact-item{transition:transform .3s ease;}
+  .contact-item:hover{transform:translateY(-4px);}
+  .contact-item .label{font-size:.7rem;color:rgba(245,242,237,.4);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;font-weight:500;}
+  .contact-item .value{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--ivory);font-weight:400;letter-spacing:.04em;}
+
+  /* Footer */
+  .footer{padding:40px 56px;text-align:center;background:var(--ink);border-top:1px solid rgba(245,242,237,.06);}
+  .footer-text{font-family:'Playfair Display',serif;font-style:italic;font-size:.8rem;color:rgba(245,242,237,.35);letter-spacing:.1em;}
+
+  /* ===== Responsive ===== */
+  @media(max-width:900px){
+    .nav{padding:16px 24px;}
+    .nav-links{display:none;}
+    .hero{padding:100px 24px 60px;}
+    .hero-grid{grid-template-columns:1fr;gap:48px;}
+    .hero-frame{width:260px;height:360px;margin:0 auto;}
+    section{padding:80px 24px;}
+    .exp-section{padding:80px 24px 0;}
+    .profile-section{padding:80px 24px;}
+    .sports-section{padding:80px 24px;}
+    .contact-section{padding:80px 24px;}
+    .profile-grid{grid-template-columns:1fr 1fr;gap:40px;}
+    .profile-metric:not(:last-child)::after{display:none;}
+    .edu-grid{grid-template-columns:1fr;gap:40px;}
+    .edu-item{border-left:none;border-top:1px solid var(--line-soft);padding:32px 0;}
+    .edu-item:first-child{border-top:none;padding-top:0;}
+    .exp-case-header{grid-template-columns:1fr;gap:12px;}
+    .exp-case-period{text-align:left;justify-content:flex-start;}
+    .exp-case-body{grid-template-columns:1fr;}
+    .metrics-strip{grid-template-columns:1fr 1fr;gap:24px;}
+    .metrics-strip .m-item:not(:last-child)::after{display:none;}
+    .sports-grid{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:repeat(2,1fr)!important;}
+    .contact-grid{gap:32px;}
+    .portfolio-drawer-inner{grid-template-columns:1fr 1fr!important;}
+    .pf-thumb-grid{grid-template-columns:repeat(2,1fr)!important;}
+    .pf-link-grid{grid-template-columns:1fr 1fr!important;}
+    .pf-split{grid-template-columns:1fr!important;}
+    .impact-card,.growth-viz{padding:28px 24px;}
+    .pf-link-row .lr-url{max-width:120px;}
+  }
+  @media(max-width:500px){
+    .nav{padding:14px 18px;}
+    .nav-brand{font-size:.9rem;}
+    .hero{padding:90px 18px 50px;}
+    .hero-name{font-size:clamp(2.8rem,12vw,4rem);}
+    .hero-subtagline{font-size:.85rem;}
+    section{padding:60px 18px;}
+    .exp-section{padding:60px 18px 0;}
+    .profile-section{padding:60px 18px;}
+    .sports-section{padding:60px 18px;}
+    .contact-section{padding:60px 18px;}
+    .footer{padding:30px 18px;}
+    .sec-title{font-size:clamp(1.6rem,6vw,2.2rem);}
+    .exp-case-num{font-size:clamp(4rem,18vw,7rem);top:-15px;left:-8px;}
+    .profile-grid{grid-template-columns:1fr;gap:36px;}
+    .profile-metric{padding:0;}
+    .edu-item{padding:28px 0;}
+    .edu-school{font-size:1.1rem;}
+    .exp-case-company{font-size:1.2rem;}
+    .metrics-strip{grid-template-columns:1fr;gap:20px;padding:24px 0;}
+    .metrics-strip .m-item:not(:last-child)::after{display:none;}
+    .metrics-strip .m-item{padding-bottom:16px;border-bottom:1px solid var(--line-soft);}
+    .metrics-strip .m-item:last-child{border-bottom:none;padding-bottom:0;}
+    .sports-card{padding:32px 24px;}
+    .btn-dark,.btn-line{padding:14px 30px;font-size:.72rem;}
+    .hero-frame{width:220px;height:300px;}
+    .hero-cta{gap:10px;}
+    .portfolio-drawer-inner{grid-template-columns:1fr!important;padding:18px;gap:16px;}
+    .pf-thumb-grid{grid-template-columns:1fr!important;}
+    .pf-link-grid{grid-template-columns:1fr!important;}
+    .pf-split{grid-template-columns:1fr!important;}
+    .gallery-grid{grid-template-columns:1fr!important;}
+    .pf-ig-card .ig-row img{width:calc(50% - 4px);}
+    .pf-link-card{padding:16px 14px;}
+    .pf-doc{padding:24px 16px;}
+    .impact-card,.growth-viz{padding:24px 20px;}
+    .contact-grid{gap:24px;}
+    .contact-item .value{font-size:.95rem;}
+    .marquee-item{font-size:.95rem;gap:40px;}
+    .marquee-track{gap:40px;}
+    .portfolio-trigger{padding:12px 26px;font-size:.72rem;}
+  }
+</style>
+</head>
+<body data-page-node-id="oZ9VU9cmE92pBpCffPxV2C">
+
+<!-- Custom Cursor -->
+<div class="cursor-dot" id="cursor-dot" data-page-node-id="bmV2i1Nw8JJOVxwCJRdS6s"></div>
+<div class="cursor-ring" id="cursor-ring" data-page-node-id="sH99yAhTFY9mHjdi1ff7ah"></div>
+
+<!-- Scroll Progress -->
+<div class="scroll-progress" id="scroll-progress" data-page-node-id="eBJjyGHCGSUePyjSwzANvV"></div>
+
+<!-- Nav -->
+<nav class="nav" id="nav" data-page-node-id="lqiy3QCczeZnOXy1o89nqX">
+  <div class="nav-brand" data-page-node-id="yxzaY3x6UZoyR2kAbKewRQ">Wu Linye</div>
+  <ul class="nav-links" data-page-node-id="5PYzvXsDprzHu0HzvETo4A">
+    <li data-page-node-id="mCqDfU73W3FMBCrtwNLF5q"><a href="#profile" data-page-node-id="zFDQYXUfTp5jAlw9pRR3Jg">Profile</a></li>
+    <li data-page-node-id="htNs6mH9kXhXyY4vrw446H"><a href="#education" data-page-node-id="44VztfbnUALdlN1GbiyxKR">Education</a></li>
+    <li data-page-node-id="eogUtpG7dq1vAFywb68b7A"><a href="#experience" data-page-node-id="jqRngpX6H0GHJv5aOTRDV1">Experience</a></li>
+    <li data-page-node-id="8AIQLDZRezIW5W00ykYQjt"><a href="#impact" data-page-node-id="OLUOlxjSH5VilkzirjsxJy">Impact</a></li>
+    <li data-page-node-id="ghgE9WEZLFbk2vpGh8Yeb1"><a href="#contact" data-page-node-id="rXd1RJ9LVSBMljhRbNH6MA">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero" data-page-node-id="RZoWQ5LuUPq95qWA0l7XWg">
+  <div class="hero-bg" data-page-node-id="iTpq7ZSEb8w2kYRcrKVCOk"></div>
+  <div class="hero-noise" data-page-node-id="mtVtbIw104z7cwqlKNsIK5"></div>
+  <div class="hero-glow" data-page-node-id="1tR4KHp9xUVW3ZjqOOPhdK"></div>
+  <div class="hero-glow-2" data-page-node-id="ZLKMLCCO8Obcx5EIXjvPWB"></div>
+
+  <div class="hero-grid" data-page-node-id="BFiCcwn4ez5FBolX0l0g5t">
+    <div class="hero-text" data-page-node-id="BcBarlow5XPWJ0GcZHsZnM">
+      <div class="hero-eyebrow" data-page-node-id="u4hEjloGZnQ4zK4QQkIokQ">
+        <div class="dot" data-page-node-id="jHSMlpqPvKBKmVkGbzvK59"></div>
+        <span data-page-node-id="DDAvNQVYX4BxAQokKdGKTk">Wu Linye · Portfolio 2026</span>
+      </div>
+      <h1 class="hero-name" id="hero-name" data-page-node-id="hbaIh8mOczZAXzpdHJ1bLg">吴林晔</h1>
+      <div class="hero-bronze-line" data-page-node-id="F4CG80CcpXSbekBRJJCG0Q"></div>
+      <p class="hero-subtagline" data-page-node-id="FvAX9iu0LCzAZyl9HVT8OH">
+        社会学硕士 · 新闻学跨校辅修<br data-page-node-id="vkUmtCiwJqDylWLR3DdWaL">
+        社会学出身，却不止于社会学。从运动科学到社会学再到新闻学，如今走进新就业群体的一线服务与宣传——以持续学习的习惯，把没做过的事一件件做成。
+      </p>
+      <div class="hero-cta" data-page-node-id="NJXvPKtgBovoUN01nHnXgs">
+        <a href="#experience" class="btn-dark" data-magnetic data-page-node-id="LGMdhtldF8528IWRqzQuUh"><span data-page-node-id="RwZcxy5fBhmEzGSugheYdZ">查看经历</span></a>
+        <a href="#contact" class="btn-line" data-magnetic data-page-node-id="zPgP20JI3yLNkhAVdchCIM">联系方式</a>
+      </div>
+    </div>
+
+    <div class="hero-visual" data-page-node-id="tK1uqB0C1Y1wvtasHqwAA8">
+      <div class="hero-frame" id="hero-frame" data-page-node-id="SweSG96kMd21PavmzDCjxR">
+        <img src="images/portrait_new.jpg" alt="吴林晔" data-page-node-id="a72lgvFY78hmMkGLG49MSo">
+        <div class="hero-frame-tag" data-page-node-id="G0qQ0Zqjsnk4shXyp9feXe">— 吴林晔 / Wu Linye</div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#profile" class="scroll-hint" data-page-node-id="NM43CjybW3mQ1mpVR82OLI">
+    <span data-page-node-id="xGt4mPAiWzT2vfcLdGVEXl">Scroll</span>
+    <div class="line" data-page-node-id="pcS1m3PCiGg85EE7TfP89K"></div>
+  </a>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-strip" data-page-node-id="YPR7J6np9zHpg0DVkFe7CK">
+  <div class="marquee-track" data-page-node-id="Hp6sIBGAwSq0wIR0iknvJF">
+    <div class="marquee-item" data-page-node-id="j9pLo0gVJgSTBxQcTA7OY9">政企对接</div>
+    <div class="marquee-item" data-page-node-id="GJGo8yU7snxi30ZjOTovSY">公文写作</div>
+    <div class="marquee-item" data-page-node-id="Rz0kFhcIRl1sTPK3XLaytW">CSR 项目执行</div>
+    <div class="marquee-item" data-page-node-id="6qNPJnCNUI2aGQp4q0p9hx">公益项目落地</div>
+    <div class="marquee-item" data-page-node-id="WyVSF297DHdQNJrzpQ9VIO">活动策划落地</div>
+    <div class="marquee-item" data-page-node-id="mTydqK7DGHajhu9GzsUH5s">利益相关方沟通</div>
+    <div class="marquee-item" data-page-node-id="1uOziM3w7VkFM9QwKRvFRs">政企对接</div>
+    <div class="marquee-item" data-page-node-id="767evV0iyHpjW7zuarVzol">公文写作</div>
+    <div class="marquee-item" data-page-node-id="UbEJj0F6Hea6W31L5TRGJb">CSR 项目执行</div>
+    <div class="marquee-item" data-page-node-id="QhdJQiHu3wW61nlWaQ0Qwq">公益项目落地</div>
+    <div class="marquee-item" data-page-node-id="dKdJQmYCN0nTzMax1gilnO">活动策划落地</div>
+    <div class="marquee-item" data-page-node-id="wnlPFSECPJFu76XAQduvPY">利益相关方沟通</div>
+  </div>
+</div>
+
+<!-- Profile -->
+<section class="profile-section" id="profile" data-page-node-id="K6cudI7uovzcyFgWJ8iPMq">
+  <div class="container" data-page-node-id="CaIZgegjwFHMZu1HCKM2NK">
+    <div class="reveal up" data-page-node-id="1gwJXxtoKBkjQAF32vq3fh">
+      <div class="sec-eyebrow" data-page-node-id="GCxX4ImmZV3ZhV49KTIwbZ">Core Highlights</div>
+      <h2 class="sec-title" data-page-node-id="iHXGOVb5OlPfVBuelQM7u7">个人亮点</h2>
+    </div>
+
+    <div class="profile-grid" data-page-node-id="u8ngjz5QSrgItKduUSJ58h">
+      <div class="profile-metric reveal up" style="animation-delay:.1s" data-page-node-id="CmedLSypver4ZJsd0SG4JL">
+        <div class="num" data-count="30" data-suffix="+" data-page-node-id="becea0EdHhkMEMo9CA6Kmp">0</div>
+        <div class="label" data-page-node-id="51RGph7CllGw9yvHkANdZT">活动策划与执行</div>
+        <div class="desc" data-page-node-id="mtyyR9zllC4MUBzFGQ5RLo">从方案到落地的全流程推进，涵盖品牌 IP 活动、专题会议、座谈交流、调研接待等多类型项目</div>
+      </div>
+      <div class="profile-metric reveal up" style="animation-delay:.2s" data-page-node-id="yDVSQISqVBmRb0xlGnprAw">
+        <div class="num" data-count="120" data-suffix="+" data-page-node-id="lHazQYkWwxdo8JXRdJluGi">0</div>
+        <div class="label" data-page-node-id="bB7Ozg3cvfBEY4go4vlnBV">对接协作单位</div>
+        <div class="desc" data-page-node-id="RPaAaLpBGKCIlLphJXND7C">常态化联动区直部门、6 个街道、60+ 社区、行业协会与公益组织，推动多方资源整合</div>
+      </div>
+      <div class="profile-metric reveal up" style="animation-delay:.3s" data-page-node-id="fSiXM280g88xM4RAJUEu97">
+        <div class="num" data-count="60" data-suffix="+" data-page-node-id="uCGUC5AtoxDvAmiYUDCMH5">0</div>
+        <div class="label" data-page-node-id="B5DM5AVzwRdaM3qj3zs8xo">核心文稿产出</div>
+        <div class="desc" data-page-node-id="tk3S6TotQzDyPuVCXuqXfa">活动方案、工作汇报、领导讲话稿、区级宣传稿，多篇阅读量破万</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section class="edu-section" id="education" data-page-node-id="pGpGhqL5e2CfKFhEeQvKTC">
+  <div class="container" data-page-node-id="Uie0fcewynrY51q0tWfuGO">
+    <div class="reveal up" data-page-node-id="TbXBXYes5TM8uurZ0lDR3I">
+      <div class="sec-eyebrow" data-page-node-id="gDBnRQXuBLWFMuAvEFT7yZ">Academic Background</div>
+      <h2 class="sec-title" data-page-node-id="LnVrRQxGIGtFIDrhlV9S53">教育背景</h2>
+      <span class="sec-title-en" data-page-node-id="tCNWIATjlmgZQHBc1fm0Mr">A foundation across sociology, journalism & management</span>
+    </div>
+
+    <div class="edu-grid" data-page-node-id="wHMp9csWCS0Vf8xuTKqHDk">
+      <div class="edu-item reveal up" style="animation-delay:.1s" data-page-node-id="uBY6dDCNcmN5LE5NjQnFyJ">
+        <div class="edu-index" data-page-node-id="rwHoDWjDnOUTp4I8zIPyrI">01</div>
+        <div class="edu-school" data-page-node-id="KZr61Zppbu2Yr36e5o42bJ">深圳大学</div>
+        <div class="edu-major" data-page-node-id="y6d3fpxoA5hsMWH0XlFpGA">体育人文社会学（社会学方向）· 硕士</div>
+        <div class="edu-degree" data-page-node-id="OGTGq635vghw9pAGRPeWar">2022.09 — 2025.07</div>
+        <div class="edu-line" data-page-node-id="HsiccPZ6DkbZv5sie20qA2"></div>
+        <div class="edu-detail" data-page-node-id="ULnjUBQ09Ki6L8p2MfSH0a">
+          GPA <strong data-page-node-id="EkcykjKvmTZlvj3WSoWLUq">3.6 / 4.0</strong>（前 25%）<br data-page-node-id="p3oGArmlmsrQ9hVGaVe131">
+          连续三年校级二等奖学金<br data-page-node-id="s3gthAOHUoqcITt1wA19Fu">
+          主修：社会学、管理学、统计学三大方向课程
+        </div>
+      </div>
+
+      <div class="edu-item reveal up" style="animation-delay:.2s" data-page-node-id="EIBG6xEhx0PZiaMSehwcZJ">
+        <div class="edu-index" data-page-node-id="miiHYNIYq4OGjYAQZq9TRw">02</div>
+        <div class="edu-school" data-page-node-id="JnusRak28HE35sGVoE6kMr">上海体育大学</div>
+        <div class="edu-major" data-page-node-id="adqowaUpulSIH61881JJE6">运动人体科学 · 理学学士</div>
+        <div class="edu-degree" data-page-node-id="AM6TdNYHbRDn5dg1nbLfEQ">2018.09 — 2022.07</div>
+        <div class="edu-line" data-page-node-id="qORZPanHTcsJc6yhbb7cmA"></div>
+        <div class="edu-detail" data-page-node-id="yYX3tqUqLCYxeqkEfZepIs">
+          GPA <strong data-page-node-id="YIlAaTbPlulNrlUF0UDeyG">3.6 / 4.0</strong>（前 15%）<br data-page-node-id="cSNsrErcjhyKvCB3hXBmWa">
+          校优秀毕业生<br data-page-node-id="rrAQpoZV4HEXGodLFQhjKm">
+          主修：人体科学、营养与健康、实验研究方法
+        </div>
+      </div>
+
+      <div class="edu-item reveal up" style="animation-delay:.3s" data-page-node-id="7sqsO2nI1a69Dv0RrWu5HR">
+        <div class="edu-index" data-page-node-id="E1rBDLlakPmDlzyETTZWpd">03</div>
+        <div class="edu-school" data-page-node-id="jV9JYOxHrw01lGrQ0Djjve">复旦大学</div>
+        <div class="edu-major" data-page-node-id="Nj1ELLAgLoz64IPjNEirRi">新闻学 · 跨校辅修</div>
+        <div class="edu-degree" data-page-node-id="SW0lLM8IIs5teQaFhwq9Eb">2020.09 — 2022.01</div>
+        <div class="edu-line" data-page-node-id="5BqZMXAQiIY88bpBZAFk9n"></div>
+        <div class="edu-detail" data-page-node-id="VMxzgHU4RxMCpKEVTvIuxA">
+          GPA <strong data-page-node-id="1OVB19o6xu267sftrwcQg4">3.4 / 4.0</strong> · 获辅修证书<br data-page-node-id="hwZxrIRpc5blbDyAME8viO">
+          主修：新闻采访与写作、广告学、广播电视学
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section class="exp-section" id="experience" data-page-node-id="cIAjB655iYMuosOcqVfKTR">
+  <div class="exp-header reveal up" data-page-node-id="RoJSJ9noZ4JGMPrVALz2eQ">
+    <div class="sec-eyebrow" data-page-node-id="4tSJ8Xn7tzGGrYFRcvkSzl">Professional Experience</div>
+    <h2 class="sec-title" data-page-node-id="35bn6drwSWK4N3EMELonhS">工作经历</h2>
+    <span class="sec-title-en" data-page-node-id="5O1rVnOvwOGGE54iAPANBj">Three chapters, one consistent way of working</span>
+    <p class="exp-intro" data-page-node-id="FDEc6VGrJXoEsCS3KKsX0L">
+      政府一线教会我分寸与秩序，品牌与用户教会我表达与共情。<br>
+      三段不同的场域，练的是同一件事——把乱的地方理清楚，把想做的事一步步往前推。
+    </p>
+  </div>
+
+  <!-- Case 1: 龙华区委 -->
+  <div class="exp-case" data-page-node-id="vx3k5yXooJVBnt0XJCJhDL">
+    <div class="exp-case-num" data-page-node-id="ly9hRjn55r2Kjkk9PBvsXU">01</div>
+    <div class="exp-case-header reveal up" data-page-node-id="70HOXCMtOHo9S6xtWCrd1N">
+      <div data-page-node-id="uwT8rRIAdPYKQjZmp7TfQn">
+        <div class="exp-case-company" data-page-node-id="OmRiZAzvxt68j2V13nrATv">中共深圳市龙华区委社会工作部</div>
+        <div class="exp-case-role" data-page-node-id="xxnmAgEgEvQlJgRXebyyQr">"两企三新"和社会组织党建科 · 工作人员</div>
+      </div>
+      <div class="exp-case-period" data-page-node-id="X1RFNgLtn5RJVmvFgm3lM3">2025.07 — Present</div>
+    </div>
+
+    <div class="exp-case-body" data-page-node-id="HrwYgcTOx4go1a5Uk1Jxhe">
+      <div class="exp-case-content reveal up" style="animation-delay:.1s" data-page-node-id="uRSkBjtNcDc4ydecn08OvS">
+        <div class="exp-block" data-page-node-id="LPyGQHPwmsURZkmydVN83d">
+          <div class="exp-block-title" data-page-node-id="ZWgT8ZalTW3vlKqysFemmW">多方对接与资源统筹</div>
+          <div class="exp-block-detail" data-page-node-id="nBUVmFpvz1AeI6Q9jqC6xj">
+            常态化统筹对接区直部门、<span class="br" data-page-node-id="i7RliFD2M3fqpbIQz9H8HC">6 个街道</span>、<span class="br" data-page-node-id="gUaj6ZTFBVmGWUqS4MeOCp">60+ 社区</span>、行业协会与公益组织等 <span class="br" data-page-node-id="GGgRnBguSMFKZD2NFpyUC2">120+ 家单位</span>，负责重点工作的督办催办。定期组织项目推进会、座谈交流与调研接待，在多方诉求之间找到共同落点，推动跨部门协同与资源整合。
+          </div>
+        </div>
+        <div class="exp-block" data-page-node-id="B06E1g3BAT00bySrU6K3GH">
+          <div class="exp-block-title" data-page-node-id="DXHFHFOvpFnvhK9H50g2Il">公益项目与品牌 IP 活动落地</div>
+          <div class="exp-block-detail" data-page-node-id="foOPlj3lPxaKCf6x19Yyg3">
+            主导"<span class="hl" data-page-node-id="EdHPrbjiFHYU2oKEnDwnyP">骑士节</span>"等关爱新就业群体品牌活动从立项、方案、资源调度、现场到复盘的全链路管理，统筹执行 <span class="br" data-page-node-id="9o6QWEFSslAQt6vSymB5uj">30+ 场</span>活动/会议/调研，单场覆盖 <span class="br" data-page-node-id="dUgKFPqcXANhB6p9fSaspr">200+ 人</span>。推动全国示范点建设，从需求排摸、方案设计到资源协调全流程跟进，服务覆盖网约配送员、家政员、网约车司机等新就业群体。
+          </div>
+        </div>
+        <div class="exp-block" data-page-node-id="QO213IHPOKmtfAtoldjprq">
+          <div class="exp-block-title" data-page-node-id="NipYD9H9LdZqmlv3jkOu0v">公文写作与官方传播</div>
+          <div class="exp-block-detail" data-page-node-id="8CXRD75Bcl6MGjXCdWY2jW">
+            撰写活动方案、工作汇报、领导讲话稿等核心文稿 <span class="br" data-page-node-id="5yaSn48gHKogC9kHeBCSwL">60+ 份</span>；主笔区级官方宣传稿，围绕"新就业群体""暖蜂"等 IP 打造系列内容，<span class="hl" data-page-node-id="oh16REMmZXV249Kw4VWmOD">多篇阅读量破万</span>，获宝安日报、读特新闻、深圳发布、中国商报网等媒体刊发。
+          </div>
+        </div>
+        <div class="exp-block" data-page-node-id="uxtuGnxHCCgykCyEHEP3CB">
+          <div class="exp-block-title" data-page-node-id="HPZSvTYT4FPoh6rqNyefP5">流程沉淀与材料管理</div>
+          <div class="exp-block-detail" data-page-node-id="S9CRQFcUAinEdTGrFLj4i6">
+            把一次性活动经验沉淀为可复用的流程清单、执行台账与素材库，规范立项、审批、资源申领与归档的每个环节，让下一次执行更省力、更不容易出错。
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-visual reveal scale" style="animation-delay:.2s" data-page-node-id="r99ZCKb5EA2m2Y9lW5MqlH">
+        <div class="impact-card" data-tilt data-page-node-id="EoC4zvuodWQ5JYWUWs9RXg">
+          <div class="impact-card-title" data-page-node-id="xzuI8OuKHnRgKy1pCePklh">··· About Me ···</div>
+          <div class="impact-item" data-page-node-id="mKmjIKA1CWNBwOLixZzxKv">
+            <div class="dot" data-page-node-id="yAcRBW4T7Yj3mgElIvU8zh"></div>
+            <div class="text" data-page-node-id="Yv9czLNwSuG5GcgoXfEnj1">英语 <strong data-page-node-id="O2Kgat6DVPPOO36GMC1mUq">CET-6 / 雅思 6.0</strong>，能独立处理英文材料与对外沟通，曾在国际赛事中担任外队随队接待</div>
+          </div>
+          <div class="impact-item" data-page-node-id="fPeBmG0ewLKI0zFh9SvB68">
+            <div class="dot" data-page-node-id="dPI8aqZt9rdEW37BwWz666"></div>
+            <div class="text" data-page-node-id="MCz4XTrfiwEhBvdYlTQoo9">持<strong data-page-node-id="BxuowsHM6CHmHzIyMqywFp">演出经纪人资格证</strong>，熟悉文化活动策划、演出市场与相关规范</div>
+          </div>
+          <div class="impact-item" data-page-node-id="AHZS1o5L2G7pTH1a4h6OI1">
+            <div class="dot" data-page-node-id="LLEqZUMnOMtto5LGMmM9f5"></div>
+            <div class="text" data-page-node-id="IDvXFLMPxeT4zXxocT3c7o">曾任校级公众号<strong data-page-node-id="IbFAx1tSEObqCUpulGw3Nu">主编</strong>，选题、采写、排版、发布一个人走完</div>
+          </div>
+          <div class="impact-item" data-page-node-id="vMqUOA0Fq15vH7LJjknfYY">
+            <div class="dot" data-page-node-id="l7pW59TNNeNJO2r6A9WVNw"></div>
+            <div class="text" data-page-node-id="AbPxyEs5KjiaCsyCdA3Zhp">习惯先把事情列成清单再动手，交付前自己会先过一遍细节，不太接受"差不多就行"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="metrics-strip reveal up" style="animation-delay:.15s" data-page-node-id="YAeWOvx1z9loLvZd1KWYPd">
+      <div class="m-item" data-page-node-id="7Ju7U0wLVQyjfa4AwxsGBc"><div class="m-num" data-count="30" data-suffix="+" data-page-node-id="HyqreEHUZcqAe5puV1BLvg">0</div><div class="m-label" data-page-node-id="BVeQEjzrd9w0CfVMxwmK7m">活动/会议统筹</div></div>
+      <div class="m-item" data-page-node-id="EEICNtZhiYM6N2vo3PGEzi"><div class="m-num" data-count="120" data-suffix="+" data-page-node-id="EFGNECCJJszk4ldAswgfyo">0</div><div class="m-label" data-page-node-id="o5EywcS8HwBDsqbdpyF1Fo">对接协作单位</div></div>
+      <div class="m-item" data-page-node-id="i88FBYgrBfujv6FvSYbtnD"><div class="m-num" data-count="60" data-suffix="+" data-page-node-id="yRCoxNnxXkQDr5R5PqAoLT">0</div><div class="m-label" data-page-node-id="uNpWcw8TvCuVoGoutzbb5q">核心文稿</div></div>
+      <div class="m-item" data-page-node-id="Dy9HmLDMvOygSBVmD3D7Q6"><div class="m-num" data-count="200" data-suffix="+" data-page-node-id="7oDL30PFOEOOEax0RvCUi2">0</div><div class="m-label" data-page-node-id="kocQF1PGmUMThzWFOPqhUH">单场最高覆盖</div></div>
+    </div>
+
+    <button class="portfolio-trigger reveal up" onclick="togglePortfolio(event, 'pf-01', this)" data-magnetic data-page-node-id="pwOGOFgaoZk6UwSs4ael75">
+      <span data-page-node-id="ziYTFmjIfJnqDNFjlIlqCq">查看作品</span>
+      <span class="pt-icon" data-page-node-id="qsPitD7Aouv88kPIS0gIai"></span>
+    </button>
+    <div class="portfolio-drawer" id="pf-01" data-page-node-id="GutkbBnvACC6rOCZ5cXm6v">
+      <div class="portfolio-drawer-inner" data-page-node-id="1DVVBca9DDmKAoKluzaAPB">
+        <div class="pf-section-label" data-page-node-id="AUm2bjVmgqs1z3moJtFitM">活动方案与总结</div>
+        <div class="pf-thumb-grid" data-page-node-id="MiswBC3fdy66UqnahnrmBt">
+          <a class="pf-thumb-card" href="files/龙华区第五届骑士节暨美团骑手党建及服务管理成果交流.pdf" target="_blank" data-page-node-id="klVhbFlgc3BhN0bA7zeF5F">
+            <div class="img-wrap" data-page-node-id="OAfxmGvPbPmj1RG3X2WNnM">
+              <img src="images/proj_knight5.jpg" alt="深新相融一路同行" data-page-node-id="Ha9S3VrRoPR3jttLmheSMe">
+              <div class="img-overlay" data-page-node-id="NneRJWk0AzQRkPUgjaQEEc"><div class="view-text" data-page-node-id="PnokCINh2FHMPzP8PGAB64">查看 PDF ↗</div></div>
+            </div>
+            <div class="t-title" data-page-node-id="SS0iAQSx2dgELTgGp7ypPm">深"新"相融 · 一路同行<br data-page-node-id="iiKnk0ZewSfagDXsFVcJJf">龙华区第五届骑士节暨美团骑手党建及服务管理成果交流</div>
+          </a>
+          <a class="pf-thumb-card" href="files/2026骑士节方案0706.pdf" target="_blank" data-page-node-id="NZs1B9BjZ7pVWluWfrP4i0">
+            <div class="img-wrap" data-page-node-id="QSTgYlFfAIkGaDJcesTR8g">
+              <img src="images/proj_apec.jpg" alt="共绘同心圆服务APEC" data-page-node-id="UhoFRduGEE5VzVBmcjzGTr">
+              <div class="img-overlay" data-page-node-id="DDQR2EMNT1usBmGnSwemEz"><div class="view-text" data-page-node-id="CpCnesentPfksqaLB3HdOs">查看 PDF ↗</div></div>
+            </div>
+            <div class="t-title" data-page-node-id="YEvipdzGNK5qmRcK70bE6B">"共绘同心圆 服务APEC"主题活动</div>
+          </a>
+          <a class="pf-thumb-card" href="files/龙华区友好城区建设工作汇报.pdf" target="_blank" data-page-node-id="QFEmUo4urvnrc1fdUGtTO7">
+            <div class="img-wrap" data-page-node-id="gQs1HqhkLOaoH1ExA7SmHk">
+              <img src="images/proj_friendly.jpg" alt="四个友好及超大社区治理" data-page-node-id="AV5Smm96Vz6qznYLhOIuxN">
+              <div class="img-overlay" data-page-node-id="4oqffHVJhA1qmps6fC2AKS"><div class="view-text" data-page-node-id="NyIXmpHKvIquDxbCZ5DKd8">查看 PDF ↗</div></div>
+            </div>
+            <div class="t-title" data-page-node-id="0Kbzsetiwb8Y7NwCJ6Fvat">龙华区推进"四个友好"及超大社区治理试点工作汇报</div>
+          </a>
+          <a class="pf-thumb-card" href="files/友好城市建设项目202604 V1.pdf" target="_blank" data-page-node-id="GOyNFstLZtTaWee2Rn7ciX">
+            <div class="img-wrap" data-page-node-id="GhLoIfw1whLN7LNAbOFDz0">
+              <img src="images/proj_ten_measures.jpg" alt="友好城市建设项目" data-page-node-id="RvEkobD6j9gXneMwsDqQdW">
+              <div class="img-overlay" data-page-node-id="E7sQWahGuF1yYBfOGMDTok"><div class="view-text" data-page-node-id="fUIeAob1zQOQTAEhd6HVkn">查看 PDF ↗</div></div>
+            </div>
+            <div class="t-title" data-page-node-id="KGT2asC3sltrxPNg6UkGIN">龙华区友好城市建设项目</div>
+          </a>
+        </div>
+
+        <div class="pf-section-label" style="margin-top:16px;" data-page-node-id="GXahkygprEQit6TGtCbPcc">宣传稿精选</div>
+        <div class="pf-link-grid" data-page-node-id="vDMBJS0KjCHKWoRZtSqJQE">
+          <a class="pf-link-card" href="https://barb.sznews.com/MB/content/202603/04/content_3429683.html" target="_blank" data-page-node-id="jlaXUPX5AMqHHA7AuoGT08">
+            <div class="l-source" data-page-node-id="kM6I1EOaCFDk40gdQ0Awr7">宝安日报</div>
+            <div class="l-title" data-page-node-id="gjY3CfH6vYM5hwrXgBAbCJ">春节暖新行动</div>
+            <div class="l-arrow" data-page-node-id="ifCAvTqyNwEqkaa7BCZ2BM">↗</div>
+          </a>
+          <a class="pf-link-card" href="https://mp.weixin.qq.com/s/HU65CQjgzdRTjsMyWeK2zA" target="_blank" data-page-node-id="WQyS3hx5A6eLQqI4dTBLAC">
+            <div class="l-source" data-page-node-id="G0u5Jg6SfQYbniGD0C38in">社会工作圳先行</div>
+            <div class="l-title" data-page-node-id="sRf9Y8g3sOvXoD2VRjWhjw">骑手英语角</div>
+            <div class="l-arrow" data-page-node-id="5OoXxEKzXYWjoBUFJbJyFo">↗</div>
+          </a>
+          <a class="pf-link-card" href="https://m.dutenews.com/n/article/10706735?from=app&client=1&trace_id=948445947720325" target="_blank" data-page-node-id="VKvxaq7rCjk4NzdQPAhLZi">
+            <div class="l-source" data-page-node-id="gpXTHvgfyowuHG5XqFMbaf">读特新闻</div>
+            <div class="l-title" data-page-node-id="UptKT0JwfCGiOWnPlmNDpr">端午暖新活动</div>
+            <div class="l-arrow" data-page-node-id="MA5hEKTzJHSkprqHFDDAli">↗</div>
+          </a>
+          <a class="pf-link-card" href="https://mp.weixin.qq.com/s/6NQQwnEdf3u0ChgEGOPZ5A" target="_blank" data-page-node-id="PWHzzePZsNtrArYDCDvveH">
+            <div class="l-source" data-page-node-id="V9jRDV5qM7CUqCA4wXTtUv">深圳发布</div>
+            <div class="l-title" data-page-node-id="czDdlaYOkZvN1UIxcftWl2">骑手AED极速配送项目</div>
+            <div class="l-arrow" data-page-node-id="9YcKnFCZs2LC3j6BBo9HPH">↗</div>
+          </a>
+          <a class="pf-link-card" href="https://www.zgswcn.com/news.html?aid=355526" target="_blank" data-page-node-id="uPkwHUlcCjQhGx1jqP6Sve">
+            <div class="l-source" data-page-node-id="Cu6pxwIVtFnIsHu7svZ8Ag">中国商报网</div>
+            <div class="l-title" data-page-node-id="CNBBNqkYEp3mql305c2PtB">全国首个网约配送行业全链通公约签署落地</div>
+            <div class="l-arrow" data-page-node-id="PIjbwAtkyAvSHiezwVjbhf">↗</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case 2: 玖治科技 -->
+  <div class="exp-case" data-page-node-id="M9BHGmGFm3g58lIrgcW4s9">
+    <div class="exp-case-num" data-page-node-id="8JkMRhHoGD1OXHPmb6NLT2">02</div>
+    <div class="exp-case-header reveal up" data-page-node-id="EfAvAHQCMJG7i3XNaUW4y3">
+      <div data-page-node-id="UfjEXFBz63qV7UEvBjDncm">
+        <div class="exp-case-company" data-page-node-id="W80HoROILTIaBiM051XDJ3">广东玖治科技有限公司</div>
+        <div class="exp-case-role" data-page-node-id="kINNyRAAlj11HHi5VNwfMY">市场部 · 品牌内容运营 & 海外客服实习生</div>
+      </div>
+      <div class="exp-case-period" data-page-node-id="o4Q3VJMXD4Q5vZPnlfcBwu">2023.07 — 2023.12</div>
+    </div>
+
+    <div class="exp-case-body" data-page-node-id="dB5eEccIp24J4ilhrgWNE8">
+      <div class="exp-visual reveal scale" style="animation-delay:.1s" data-page-node-id="Z2rsxGWbGU6zbB1IVqfJko">
+        <div class="growth-viz" data-tilt data-page-node-id="2Lovj7H7PjCsRuvGkz7Wan">
+          <div class="growth-viz-title" data-page-node-id="Z5ME3FQjLNYhdYdoqjwEvD">··· Community Growth · Facebook ···</div>
+          <div class="growth-bar-wrap" data-page-node-id="3T3VyqDtVP7xbKAGx9M45X">
+            <div class="growth-bar-label" data-page-node-id="SHFQZqv3Im1LhqgFIpGYuG"><span data-page-node-id="EsFvp4KhoYqP5ntPbsRqq7">月均发布内容</span><span data-page-node-id="WNh8SegqVeZvzDBI5GiU4F">40+ 条</span></div>
+            <div class="growth-bar-track" data-page-node-id="d0u3kH6fJ8UIsSAUVjdJ5R"><div class="growth-bar-fill" style="--target-width:80%" data-page-node-id="1kHCkAUiWnyPvrs72zHbnE"></div></div>
+          </div>
+          <div class="growth-bar-wrap" data-page-node-id="MgODPuxGCx1MAs8hDpGSSE">
+            <div class="growth-bar-label" data-page-node-id="RsGHHJ9MMtSFKG6aTGEHm6"><span data-page-node-id="G0g1IYC067vwqdw64uFrlP">UGC 征集（3个月）</span><span data-page-node-id="al43wPr7kou4AR3BnmSXAP">200+ 条</span></div>
+            <div class="growth-bar-track" data-page-node-id="aosutq8xEE5NECfZe6NvHE"><div class="growth-bar-fill" style="--target-width:85%" data-page-node-id="UV0hfVOMLSFtELfTNS4F6J"></div></div>
+          </div>
+          <div class="growth-bar-wrap" data-page-node-id="BrofplESIYlwz1M7M4D1X8">
+            <div class="growth-bar-label" data-page-node-id="NUVRBeAuFtR9SRcS2xHf4d"><span data-page-node-id="iAccnDoEpUhepKkQue80GL">邮件独立解决率</span><span data-page-node-id="pd63XlqbgC81C2l0lm9mSv">95%</span></div>
+            <div class="growth-bar-track" data-page-node-id="acBvuemCbgjuWATwJkfQA4"><div class="growth-bar-fill" style="--target-width:95%" data-page-node-id="VOtjghimDUV9IE1J8hSrL9"></div></div>
+          </div>
+          <div class="growth-comparison" data-page-node-id="wn32wt0FyZ34WH0swTBEtO">
+            <div class="from" data-page-node-id="OqJW3IEurDT7YmjDcWqiwj">
+              <div class="val" data-page-node-id="0JpbtKWjggVHIBjoewxb9y">3K</div>
+              <div class="val-label" data-page-node-id="COw5d5uelifZNDo1tPk6QH">社群初始规模</div>
+            </div>
+            <div class="arrow" data-page-node-id="1Qcy4IYGZ1qykBolWsC6Yw">→</div>
+            <div class="to" data-page-node-id="tw1CyfvbmS5SbACP35DBJL">
+              <div class="val" data-page-node-id="E9pc2lVipoQ41ESY9kGrnL">9K</div>
+              <div class="val-label" data-page-node-id="KOE0LHXpACKk0sqHUVvHGC">3个月增长后</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-case-content reveal up" style="animation-delay:.2s" data-page-node-id="GyArpXv449pySy7uK4YZKC">
+        <div class="exp-block" data-page-node-id="dRGT5xD9iYGiEPikXB1RQ2">
+          <div class="exp-block-title" data-page-node-id="8CAyuNvDOM4AQXz43T2ULR">社群运营与故事化内容产出</div>
+          <div class="exp-block-detail" data-page-node-id="Sg1iOsxfbZSJdNj44yBCnf">
+            运营 <span class="hl" data-page-node-id="oeb6Tol9pkDvn3x1NCrDL7">Facebook / Instagram</span> 官方账号，月均发布 <span class="br" data-page-node-id="7UuTkc89tpFoREKN6dgTlZ">40+ 条</span>。策划"从激励到展示"系列 UGC 征集活动，从用户真实故事中挖掘素材进行内容化包装，3 个月征集优质 UGC <span class="br" data-page-node-id="4MOPB09gCj02A5ddM04SRB">200+ 条</span>；运营核心用户社群，3 个月从 <span class="br" data-page-node-id="NOXEyEVH7JIYzXoRmUTcfQ">3,000 人扩展至 9,000 人</span>，月均发言率 <span class="br" data-page-node-id="Gnx4D3qsjP7Ch7wuYbuid1">20%+</span>。
+          </div>
+        </div>
+        <div class="exp-block" data-page-node-id="HgkaPCSJD1XkcKhZEk91jq">
+          <div class="exp-block-title" data-page-node-id="AFSOHuc7E7A4hUISW4SL2P">用户服务与多任务协同</div>
+          <div class="exp-block-detail" data-page-node-id="cyTdJWjXxgNttYU0m3eNJM">
+            熟练使用 Zendesk 工单系统，日均处理 <span class="br" data-page-node-id="1mh24wAuQK24aF4DBc5C4N">80+ 封邮件</span>，独立解决率 <span class="br" data-page-node-id="1SgBUqCMwBbFM3ymqQH8Hd">95%</span>，在多任务并行中保持响应质量。协同产品团队撰写并优化官方产品文档、操作指南与 FAQ，具备细致严谨的文本整理能力。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="portfolio-trigger reveal up" onclick="togglePortfolio(event, 'pf-02', this)" data-magnetic data-page-node-id="VbAfOOrrznmTLB1AhcxiHC">
+      <span data-page-node-id="c5qOrBIrg5Tc0v94V1cj6c">查看作品</span>
+      <span class="pt-icon" data-page-node-id="CjHKxe0LMjpJ3JfXlGJceq"></span>
+    </button>
+    <div class="portfolio-drawer" id="pf-02" data-page-node-id="gGtdgwW7Xb31IsIPoDt1xz">
+      <div class="portfolio-drawer-inner" style="grid-template-columns:1fr 1fr;" data-page-node-id="lRYX5X2IR7ukltd48WLwTq">
+        <div class="pf-block" data-page-node-id="rjlU6TrSE6qqjm9TLtBtxi">
+          <div class="pf-block-label" data-page-node-id="OpwWKX3xfIUeoslHwwFzWA">社交媒体内容</div>
+          <a class="pf-ig-card" href="https://www.instagram.com/ringconn_official?igsh=MTMwMmMzaHhwMGhrOQ==" target="_blank" data-page-node-id="h4SDXKFNpLuFIx2ycgmAAO">
+            <div class="ig-row" data-page-node-id="N7qMB8FhBnbGSsaelm4fiy">
+              <img src="images/ringconn_1.jpg" alt="RingConn Instagram 1" data-page-node-id="E0715tAvWwFDGDr1ijx1Tn">
+              <img src="images/ringconn_2.jpg" alt="RingConn Instagram 2" data-page-node-id="SEGnltCekZxXRdcdv1N5nX">
+            </div>
+            <div class="ig-handle" data-page-node-id="9mJIODBrMsmADDS4AMfuc9"><span class="ig-icon" data-page-node-id="ESA8hifUAHYGKKi4W6yQyO">Ig</span> @ringconn_official</div>
+          </a>
+        </div>
+        <div class="pf-block" data-page-node-id="fESOZEHTWZDvC0V7P00Kfb">
+          <div class="pf-block-label" data-page-node-id="eoQ3l2rDx3IZoUW4OmxPIJ">产品功能解读</div>
+          <a class="pf-link-row" href="https://ringconn.com/pages/app-features" target="_blank" data-page-node-id="MK4Xd7E1RAzhcrvprDW2fO">
+            <div data-page-node-id="dhMektsEXiyql4REdky4WR">
+              <div class="lr-title" data-page-node-id="uPmeHCZBTZLcMUL6bS0Ak7">App Features</div>
+              <div class="lr-url" data-page-node-id="4vQchrAz7BSeU7majUJ9XI">ringconn.com/pages/app-features</div>
+            </div>
+            <div class="lr-arrow" data-page-node-id="oKjV3TNKZUU5wnCZW03rY5">↗</div>
+          </a>
+          <a class="pf-link-row" href="https://ringconn.com/pages/smart-ring" target="_blank" data-page-node-id="6tvGou80ATcogmVn724fsx">
+            <div data-page-node-id="CLOAfEq24yoGGs8dUkgk5n">
+              <div class="lr-title" data-page-node-id="C03hDAIa38Qb0IiYcf7vV3">Smart Ring</div>
+              <div class="lr-url" data-page-node-id="pItmqjg2r6wUykRasFcZ3u">ringconn.com/pages/smart-ring</div>
+            </div>
+            <div class="lr-arrow" data-page-node-id="MPoDzJYk1lf6TzK0SBC8mF">↗</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case 3: 维梵体育 -->
+  <div class="exp-case" data-page-node-id="X2WdGeuh6ehciVNBCCFhZP">
+    <div class="exp-case-num" data-page-node-id="O0oPFtgdjXzEIC0IlP1UnK">03</div>
+    <div class="exp-case-header reveal up" data-page-node-id="kKsMC0OohCXiJpnRtLDa0k">
+      <div data-page-node-id="tiRyMaZ0k5jhDDOsSaMEZ2">
+        <div class="exp-case-company" data-page-node-id="mlfsuZM1GzIWDBnkqJFnIZ">维梵体育文化（上海）有限公司</div>
+        <div class="exp-case-role" data-page-node-id="lkVDKqSZw0cnG5OSGeGnEn">新媒体内容运营实习生</div>
+      </div>
+      <div class="exp-case-period" data-page-node-id="j8dJGOhrzAq3BHnb0s5Woq">2021.10 — 2022.03</div>
+    </div>
+
+    <div class="exp-case-body stacked" data-page-node-id="JGEH4uFvEDlAZ9xTwKXFCw">
+      <div class="exp-case-content reveal up" style="animation-delay:.1s" data-page-node-id="fdSimKxw7qybQ6c0H1Qur1">
+        <div class="exp-block" data-page-node-id="yF6sAWtw7DGLVUAAZG85yl">
+          <div class="exp-block-title" data-page-node-id="7szsfiZSWG7sgpts0IxKKC">多账号内容编辑与日常产出</div>
+          <div class="exp-block-detail" data-page-node-id="VgCjuCNNjobDaRMzMbbYRf">
+            负责多个国际 IP 官方中文微博账号的内容编撰与发布，日均产出 <span class="br" data-page-node-id="wzQpGr4pyRc0TIk4gJIwR2">20+ 篇</span>，覆盖资讯预告、互动话题、人物故事等多元内容形态，保证多账号并行下的稳定更新节奏。
+          </div>
+        </div>
+        <div class="exp-block" data-page-node-id="21jSMcbRN2eT8boEoa11PW">
+          <div class="exp-block-title" data-page-node-id="L9SGRLRmfoY8Ytok0yZUQa">话题策划与数据复盘</div>
+          <div class="exp-block-detail" data-page-node-id="kQO6G7ZrmAR3BhZKud85c7">
+            参与互动话题与视觉海报的创意策划，显著提升讨论热度与粉丝期待感；负责社媒表现的多维度数据分析，从数据中提炼洞察并转化为可执行的优化建议，驱动内容策略持续迭代。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="portfolio-trigger reveal up" onclick="togglePortfolio(event, 'pf-03', this)" data-magnetic data-page-node-id="SyfGBv1yQEMSOLUfg90hBh">
+      <span data-page-node-id="QF55Yu6qxoNozN8VHhwtUd">查看作品</span>
+      <span class="pt-icon" data-page-node-id="sCofNtPY4TqgTVb7BGjH5b"></span>
+    </button>
+    <div class="portfolio-drawer" id="pf-03" data-page-node-id="EhaXRJvNWClzIuN1kbaExH">
+      <div class="portfolio-drawer-inner pf-split" style="grid-template-columns:1fr 1fr;gap:28px;" data-page-node-id="ROB54YUzE4LqHexcHenoo9">
+        <div data-page-node-id="vjybA5TSq90zwGtL2QABFo">
+          <div class="pf-section-label" style="grid-column:auto;" data-page-node-id="QTSAtUFZRojgQOHorTnfI9">社媒内容作品</div>
+          <div class="gallery-grid" style="grid-template-columns:repeat(2,1fr);" data-page-node-id="CeByJjUlGBI0M9DcCCWz0n">
+            <img class="thumb" src="images/xijia_weibo_1.png" alt="西甲微博 1" onclick="openLightbox(event,this.src)" data-page-node-id="NtL6QoQPLBrd9ARADWAjcU">
+            <img class="thumb" src="images/xijia_weibo_2.png" alt="西甲微博 2" onclick="openLightbox(event,this.src)" data-page-node-id="CP3FuHmIadH6TQ6cosG1Lq">
+            <img class="thumb" src="images/xijia_weibo_3.png" alt="西甲微博 3" onclick="openLightbox(event,this.src)" data-page-node-id="kwktOE0E4rsm2DTMbYWBxm">
+            <img class="thumb" src="images/xijia_weibo_4.png" alt="西甲微博 4" onclick="openLightbox(event,this.src)" data-page-node-id="toRomn9lqpFU1nt43O8Jtc">
+            <img class="thumb" src="images/xijia_weibo_5.png" alt="西甲微博 5" onclick="openLightbox(event,this.src)" data-page-node-id="Mr09RlhdcFvrbGEP8eMnPx">
+            <img class="thumb" src="images/xijia_weibo_6.png" alt="西甲微博 6" onclick="openLightbox(event,this.src)" data-page-node-id="TnJmjU9gVVMokmsYXghErL">
+          </div>
+        </div>
+        <div data-page-node-id="4v89uE9hNBUzouULV8dst5">
+          <div class="pf-section-label" style="grid-column:auto;" data-page-node-id="tP6VYeodPZDArySzAAMDAp">视觉与海报创意</div>
+          <div class="gallery-grid" style="grid-template-columns:repeat(2,1fr);" data-page-node-id="e6GEWA4NLVjKhqhFCLdBXt">
+            <img class="thumb" src="images/xijia_newyear.jpg" alt="新年快乐海报" onclick="openLightbox(event,this.src)" data-page-node-id="Dn7RQRkLtI6RSsR9LEZCK0">
+            <img class="thumb" src="images/xijia_exam.jpg" alt="逢考必过海报" onclick="openLightbox(event,this.src)" data-page-node-id="5JYGt2S8uzdCmWJsHkAAMM">
+            <img class="thumb" src="images/xijia_touchdown.jpg" alt="目标达阵海报" onclick="openLightbox(event,this.src)" data-page-node-id="01vAEuvSrccWHym8XXnSiB">
+            <img class="thumb" src="images/xijia_spring.png" alt="春节微博" onclick="openLightbox(event,this.src)" data-page-node-id="BNc4G1BwOGnhz4ZfzDPd0K">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Large-scale Event & Volunteer -->
+<section class="sports-section" id="impact" data-page-node-id="aHNgtZNX5Gv9bmcxw7ZHmh">
+  <div class="container" data-page-node-id="RMfwYFDgjbqCRUdVwuKxHn">
+    <div class="reveal up" style="text-align:center" data-page-node-id="6eWsfXWUAV8nTZajQSY6is">
+      <div class="sec-eyebrow" style="justify-content:center;" data-page-node-id="fkPlbg0d6E77Xphk5HDqpT">Large-scale Events & Volunteering</div>
+      <h2 class="sec-title" data-page-node-id="jkL9gSJ5OTeH1FdexMjFnI">大型活动执行与志愿服务</h2>
+      <span class="sec-title-en" data-page-node-id="QwW49RHcbESvgSo2weiG9R">On-the-ground coordination, reception & cross-cultural communication</span>
+    </div>
+
+    <div class="sports-grid" data-page-node-id="nB63wTQKWokRdhAcv1ynQb">
+      <div class="sports-card reveal up" style="animation-delay:.1s" data-tilt data-page-node-id="hbXHOC0G7GBVnkr8E3RLSI">
+        <div class="sports-card-num" data-page-node-id="MeW3jBVElKVc117ubJBm7h">01</div>
+        <div class="sports-card-event" data-page-node-id="QRBO0M7TiilG1sFFW8QmbS">国际赛事贵宾接待</div>
+        <div class="sports-card-role" data-page-node-id="7GuiSjRBM5iEZNezKAuQQ0">外方团队随队志愿者</div>
+        <div class="sports-card-date" data-page-node-id="JOoCEEnEOxntSvxlW2wuUT">Shenzhen · 2023.11</div>
+        <div class="sports-card-line" data-page-node-id="C5cWdhPA8fiy1vyYeDO2fH"></div>
+        <div class="sports-card-detail" data-page-node-id="2IBU1eHNMmQDMpflBTrTWD">
+          全程对接日本国家队，负责日程安排、出行保障与现场协调。在高强度环境下实时处理突发情况，协调外方团队与组委会之间的信息传递，严格按照国际接待标准执行任务，锻炼了跨文化沟通与涉外接待能力。
+        </div>
+      </div>
+
+      <div class="sports-card reveal up" style="animation-delay:.2s" data-tilt data-page-node-id="3KDftgXG7l7PtQWArhl5hK">
+        <div class="sports-card-num" data-page-node-id="MkGKsd4JBWDv7qKmS2bZms">02</div>
+        <div class="sports-card-event" data-page-node-id="Zk4cbKBvjs3yTa3nICPNnT">深圳国际马拉松</div>
+        <div class="sports-card-role" data-page-node-id="EP8kvrW7xXWQSePqroJC2q">品牌展台志愿者</div>
+        <div class="sports-card-date" data-page-node-id="ui8OnYa71s3OXTOaYGi2A3">Shenzhen · 2023.02</div>
+        <div class="sports-card-line" data-page-node-id="yHQ4Xspq3G8YM7iL3yNMLv"></div>
+        <div class="sports-card-detail" data-page-node-id="ZBT3RZaAaTa56353OxQHfM">
+          负责品牌展台的物资分发与现场服务，确保流程高效有序；面向参与者讲解品牌装备与使用方式，强化品牌专业心智，并提供打卡互动服务提升现场体验与参与感。
+        </div>
+      </div>
+
+      <div class="sports-card reveal up" style="animation-delay:.3s" data-tilt data-page-node-id="GHHUOQj2ITC6vVj9BEfNYM">
+        <div class="sports-card-num" data-page-node-id="X1zUEYoxz8bBUBK0dhLKYX">03</div>
+        <div class="sports-card-event" data-page-node-id="LPY4mqA1TgGP2bF1GFLSe4">上海国际马拉松</div>
+        <div class="sports-card-role" data-page-node-id="ULVrUhj2cqnMsGadZDJdqg">现场秩序志愿者</div>
+        <div class="sports-card-date" data-page-node-id="lqfZ09oSkUS3NJxQY21C92">Shanghai · 2019.11</div>
+        <div class="sports-card-line" data-page-node-id="NQj9PX13CXuohz16pLdRNs"></div>
+        <div class="sports-card-detail" data-page-node-id="iYGKNyiS2sA1B5FIPwhUiu">
+          负责起点区域的人员动线规划与秩序管控，高效疏导近万名参与者有序入场；主导分区管理与检录流程执行，优化集结效率，确保关键环节零延误。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact-section" id="contact" data-page-node-id="OftU8ggJBtkCA1VzlSkTsq">
+  <div class="contact-glow" data-page-node-id="q2SoTkdinBjiWgfMJzF1LT"></div>
+  <div class="contact-content" data-page-node-id="mFbUWoOJ0FD87Hx5snwzSC">
+    <div class="reveal up" data-page-node-id="vRkh1vl3rJfCIE2EpMmIc0">
+      <div class="contact-eyebrow" data-page-node-id="BVgJ1RisWworBwLIEPRjtJ">Get in Touch</div>
+      <h2 class="contact-title" data-page-node-id="2dMJrLl3GOgKEc9XsO3OZG">用专业与温度，连接政府、企业与公众<br data-page-node-id="lbUlS4etLeLfB84xqD7W7r"><span style="font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:.7em;color:var(--bronze-soft)" data-page-node-id="bCGZfIMZJWDdTmiurgUGqD">Connecting government, business & community.</span></h2>
+    </div>
+
+    <div class="contact-grid reveal up" style="animation-delay:.15s" data-page-node-id="a00HFrGhm6WrBUSFYWzRib">
+      <div class="contact-item" data-page-node-id="aXhHVMcsJWPvtyFVODT4fO">
+        <div class="label" data-page-node-id="hTw2ycBrZyTVxaco0orsKj">Phone</div>
+        <div class="value" data-page-node-id="3WFRZo9IZXzl8qSbsS7FKx">+86 18019441819</div>
+      </div>
+      <div class="contact-item" data-page-node-id="fWBD1QPOiLI7WbKqXHua6b">
+        <div class="label" data-page-node-id="e9ncWBDBaVnBP7rN4R9HWl">WeChat</div>
+        <div class="value" data-page-node-id="xCuiFufRXjDkfcfov6cpSM">crystalwliny</div>
+      </div>
+      <div class="contact-item" data-page-node-id="I2wEfjB9HrovoBLW9S2bFL">
+        <div class="label" data-page-node-id="Q7NMatgdqKEDAMwiAefEGT">Email</div>
+        <div class="value" data-page-node-id="HgVW062BQIE4ozvRFDiyxW">crystalwliny@163.com</div>
+      </div>
+      <div class="contact-item" data-page-node-id="C7StTcgPRlJfEq1Ec1ydRf">
+        <div class="label" data-page-node-id="VxGoBf9rejEDjaz0QsPEk3">Based in</div>
+        <div class="value" data-page-node-id="IGElxNGwo5luyNI5Q3mF5v">Shenzhen, China</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer" data-page-node-id="DYBPA5dfBX4bH9TMA9B8Uw">
+  <div class="footer-text" data-page-node-id="xyJ93OB7JYjwOkuADoUFOG">Wu Linye · 2025 — Crafted with intention.</div>
+</footer>
+
+<!-- Lightbox -->
+<div id="lightbox" onclick="closeLightbox(event)" data-page-node-id="UPKryYbRVcrZg52cAGL5PP">
+  <img id="lightbox-img" src="" alt="preview" data-page-node-id="VudPq89xxPg4isWGd3TnmY">
+</div>
+<button id="lb-close" onclick="closeLightbox(event,true)" data-page-node-id="rAmLcZ25xlemmF23DrsgNY">✕</button>
+
+<script>
+// ===== Custom Cursor =====
+const cursorDot = document.getElementById('cursor-dot');
+const cursorRing = document.getElementById('cursor-ring');
+let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursorDot.style.left = mouseX + 'px';
+  cursorDot.style.top = mouseY + 'px';
+});
+
+// Smooth ring follow
+function animateRing(){
+  ringX += (mouseX - ringX) * 0.18;
+  ringY += (mouseY - ringY) * 0.18;
+  cursorRing.style.left = ringX + 'px';
+  cursorRing.style.top = ringY + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+// Cursor hover states
+document.querySelectorAll('a, button, .pf-thumb-card, .pf-link-card, .pf-doc, [data-magnetic]').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursorDot.classList.add('hover');
+    cursorRing.classList.add('hover');
+  });
+  el.addEventListener('mouseleave', () => {
+    cursorDot.classList.remove('hover');
+    cursorRing.classList.remove('hover');
+  });
+});
+
+// ===== Scroll Progress =====
+const progressBar = document.getElementById('scroll-progress');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  progressBar.style.width = scrollPercent + '%';
+});
+
+// ===== Nav =====
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 80) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+// ===== Reveal Animation =====
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('up');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ===== Hero Name Char Animation =====
+const heroName = document.getElementById('hero-name');
+const nameText = heroName.textContent;
+heroName.innerHTML = '';
+[...nameText].forEach((char, i) => {
+  const span = document.createElement('span');
+  span.className = 'char';
+  span.textContent = char;
+  span.style.animationDelay = (0.3 + i * 0.12) + 's';
+  heroName.appendChild(span);
+});
+
+// ===== Count Up Animation =====
+function countUp(el) {
+  const target = parseInt(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1800;
+  const start = performance.now();
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(target * eased);
+    el.innerHTML = current.toLocaleString('en-US') + (suffix ? '<span class="suffix">' + suffix + '</span>' : '');
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && e.target.dataset.count) {
+      countUp(e.target);
+      countObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: .5 });
+document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
+
+// ===== Growth Bar Animation =====
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('animate');
+      barObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: .3 });
+document.querySelectorAll('.growth-bar-fill').forEach(el => barObserver.observe(el));
+
+// ===== Hero Parallax =====
+const heroFrame = document.getElementById('hero-frame');
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  if (scrolled < window.innerHeight && heroFrame) {
+    heroFrame.style.transform = `translateY(${scrolled * 0.12}px)`;
+  }
+});
+
+// ===== Magnetic Buttons =====
+document.querySelectorAll('[data-magnetic]').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    btn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = '';
+  });
+});
+
+// ===== Tilt Effect =====
+document.querySelectorAll('[data-tilt]').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    const tiltX = (y - 0.5) * 8;
+    const tiltY = (x - 0.5) * -8;
+    card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-4px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+
+// ===== Portfolio Drawer Toggle =====
+function togglePortfolio(e, id, btn) {
+  e.stopPropagation();
+  // Ripple
+  const ripple = document.createElement('span');
+  ripple.className = 'ripple';
+  const rect = btn.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  ripple.style.width = ripple.style.height = size + 'px';
+  ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+  ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+  btn.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 600);
+
+  const drawer = document.getElementById(id);
+  drawer.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+
+// ===== Lightbox =====
+function openLightbox(e, src) {
+  e.stopPropagation();
+  document.getElementById('lightbox').classList.add('active');
+  document.getElementById('lb-close').classList.add('active');
+  document.getElementById('lightbox-img').src = src;
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(e, force) {
+  if (!force && e.target.id !== 'lightbox') return;
+  document.getElementById('lightbox').classList.remove('active');
+  document.getElementById('lb-close').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeLightbox(e, true);
+  }
+});
+</script>
+
+</body>
+</html>
